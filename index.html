@@ -32,10 +32,7 @@
     .top-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:18px}
     .brand{display:flex;align-items:center;gap:12px}
     .logo{
-      width:44px;height:44px;border-radius:10px;object-fit:cover;box-shadow:0 8px 28px rgba(234,93,243,0.12);border:2px solid rgba(234,93,243,0.3);
-    }
-    .logo.fallback{
-      background:linear-gradient(135deg,var(--accent),#9b5cf2);display:flex;align-items:center;justify-content:center;font-weight:800;color:white;object-fit:initial;
+      width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#9b5cf2);display:flex;align-items:center;justify-content:center;font-weight:800;color:white;box-shadow:0 8px 28px rgba(234,93,243,0.12)
     }
     .brand-title{font-weight:700;font-size:1.05rem;letter-spacing:.2px}
     nav.topnav{margin-left:28px;display:flex;gap:14px;align-items:center}
@@ -607,33 +604,31 @@ const COMMANDS = [
   { name: "/bannedin", usage: "/bannedin <user_id>", type: "slash", category: "owner", description: "Check ban status" }
 ];
 
-// Category info with custom Discord emojis
-// Replace the emoji URLs with your actual Discord emoji URLs from your server
-// Format: https://cdn.discordapp.com/emojis/EMOJI_ID.png (or .gif for animated)
+// Category info with emojis
 const CATEGORY_INFO = {
-  afk: { emoji: "https://cdn.discordapp.com/emojis/1362307270003785800.webp", title: "AFK", fallback: "💤" },
-  moderation: { emoji: "https://cdn.discordapp.com/emojis/YOUR_MOD_EMOJI_ID.png", title: "Moderation", fallback: "🔨" },
-  automod: { emoji: "https://cdn.discordapp.com/emojis/YOUR_AUTOMOD_EMOJI_ID.png", title: "AutoMod", fallback: "🛡️" },
-  roles: { emoji: "https://cdn.discordapp.com/emojis/YOUR_ROLES_EMOJI_ID.png", title: "Roles", fallback: "🎭" },
-  server: { emoji: "https://cdn.discordapp.com/emojis/YOUR_SERVER_EMOJI_ID.png", title: "Server", fallback: "🏠" },
-  utility: { emoji: "https://cdn.discordapp.com/emojis/YOUR_UTILITY_EMOJI_ID.png", title: "Utility", fallback: "🔧" },
-  timezone: { emoji: "https://cdn.discordapp.com/emojis/YOUR_TIMEZONE_EMOJI_ID.png", title: "Timezone", fallback: "🌍" },
-  translation: { emoji: "https://cdn.discordapp.com/emojis/YOUR_TRANSLATION_EMOJI_ID.png", title: "Translation", fallback: "🌐" },
-  snipe: { emoji: "https://cdn.discordapp.com/emojis/YOUR_SNIPE_EMOJI_ID.png", title: "Snipe", fallback: "🎯" },
-  music: { emoji: "https://cdn.discordapp.com/emojis/YOUR_MUSIC_EMOJI_ID.png", title: "Music", fallback: "🎵" },
-  tts: { emoji: "https://cdn.discordapp.com/emojis/YOUR_TTS_EMOJI_ID.png", title: "TTS", fallback: "🗣️" },
-  fun: { emoji: "https://cdn.discordapp.com/emojis/YOUR_FUN_EMOJI_ID.png", title: "Fun", fallback: "🎮" },
-  rpg: { emoji: "https://cdn.discordapp.com/emojis/YOUR_RPG_EMOJI_ID.png", title: "RPG", fallback: "⚔️" },
-  social: { emoji: "https://cdn.discordapp.com/emojis/YOUR_SOCIAL_EMOJI_ID.png", title: "Social", fallback: "💖" },
-  giveaway: { emoji: "https://cdn.discordapp.com/emojis/YOUR_GIVEAWAY_EMOJI_ID.png", title: "Giveaways", fallback: "🎉" },
-  tickets: { emoji: "https://cdn.discordapp.com/emojis/YOUR_TICKETS_EMOJI_ID.png", title: "Tickets", fallback: "🎫" },
-  reminders: { emoji: "https://cdn.discordapp.com/emojis/YOUR_REMINDERS_EMOJI_ID.png", title: "Reminders", fallback: "⏰" },
-  messaging: { emoji: "https://cdn.discordapp.com/emojis/YOUR_MESSAGING_EMOJI_ID.png", title: "Messaging", fallback: "💬" },
-  external: { emoji: "https://cdn.discordapp.com/emojis/YOUR_EXTERNAL_EMOJI_ID.png", title: "External", fallback: "🔗" },
-  emojis: { emoji: "https://cdn.discordapp.com/emojis/YOUR_EMOJIS_EMOJI_ID.png", title: "Emojis", fallback: "😀" },
-  stats: { emoji: "https://cdn.discordapp.com/emojis/YOUR_STATS_EMOJI_ID.png", title: "Stats", fallback: "📊" },
-  premium: { emoji: "https://cdn.discordapp.com/emojis/YOUR_PREMIUM_EMOJI_ID.png", title: "Premium", fallback: "⭐" },
-  owner: { emoji: "https://cdn.discordapp.com/emojis/YOUR_OWNER_EMOJI_ID.png", title: "Owner", fallback: "👑" }
+  afk: { emoji: "💤", title: "AFK" },
+  moderation: { emoji: "🔨", title: "Moderation" },
+  automod: { emoji: "🛡️", title: "AutoMod" },
+  roles: { emoji: "🎭", title: "Roles" },
+  server: { emoji: "🏠", title: "Server" },
+  utility: { emoji: "🔧", title: "Utility" },
+  timezone: { emoji: "🌍", title: "Timezone" },
+  translation: { emoji: "🌐", title: "Translation" },
+  snipe: { emoji: "🎯", title: "Snipe" },
+  music: { emoji: "🎵", title: "Music" },
+  tts: { emoji: "🗣️", title: "TTS" },
+  fun: { emoji: "🎮", title: "Fun" },
+  rpg: { emoji: "⚔️", title: "RPG" },
+  social: { emoji: "💖", title: "Social" },
+  giveaway: { emoji: "🎉", title: "Giveaways" },
+  tickets: { emoji: "🎫", title: "Tickets" },
+  reminders: { emoji: "⏰", title: "Reminders" },
+  messaging: { emoji: "💬", title: "Messaging" },
+  external: { emoji: "🔗", title: "External" },
+  emojis: { emoji: "😀", title: "Emojis" },
+  stats: { emoji: "📊", title: "Stats" },
+  premium: { emoji: "⭐", title: "Premium" },
+  owner: { emoji: "👑", title: "Owner" }
 };
 
 const modal = document.getElementById('modal');
