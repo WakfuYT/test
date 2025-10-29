@@ -3,14 +3,11 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>AUTOROLE · Commands</title>
-  <meta name="description" content="Autorole bot commands — searchable, categorized commands" />
+  <title>AUTOROLE · Discord Bot</title>
+  <meta name="description" content="Autorole bot - Advanced role management and moderation" />
   
-  <!-- Favicon -->
   <link rel="icon" type="image/png" href="https://cdn.discordapp.com/avatars/YOUR_BOT_ID/YOUR_AVATAR_HASH.png">
-
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
 
   <style>
     :root{
@@ -18,23 +15,27 @@
       --panel: rgba(255,255,255,0.02);
       --muted:#9aa0a6;
       --accent:#EA5DF3;
+      --accent-secondary:#9b5cf2;
       --glass-border: rgba(255,255,255,0.04);
       --card-bg: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.008));
       --radius:14px;
       --ease: cubic-bezier(.22,.9,.32,1);
     }
     *{box-sizing:border-box}
-    html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;color:#e6e7e8; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; background: linear-gradient(180deg,#020203 0%, #050506 100%);}
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;color:#e6e7e8; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; background: linear-gradient(180deg,#020203 0%, #050506 100%);scroll-behavior:smooth}
     a{color:inherit;text-decoration:none}
     
     /* topbar */
     header.topbar{
-      position:sticky;top:0;z-index:50;padding:12px 20px;background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));backdrop-filter: blur(6px);border-bottom:1px solid rgba(255,255,255,0.02);
+      position:sticky;top:0;z-index:100;padding:12px 20px;background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));backdrop-filter: blur(12px);border-bottom:1px solid rgba(255,255,255,0.02);
     }
     .top-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:18px}
     .brand{display:flex;align-items:center;gap:12px}
     .logo{
-      width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#9b5cf2);display:flex;align-items:center;justify-content:center;font-weight:800;color:white;box-shadow:0 8px 28px rgba(234,93,243,0.12)
+      width:44px;height:44px;border-radius:10px;object-fit:cover;box-shadow:0 8px 28px rgba(234,93,243,0.12);border:2px solid rgba(234,93,243,0.3);
+    }
+    .logo.fallback{
+      background:linear-gradient(135deg,var(--accent),#9b5cf2);display:flex;align-items:center;justify-content:center;font-weight:800;color:white;object-fit:initial;
     }
     .brand-title{font-weight:700;font-size:1.05rem;letter-spacing:.2px}
     nav.topnav{margin-left:28px;display:flex;gap:14px;align-items:center}
@@ -43,6 +44,78 @@
     nav.topnav a.active{background:rgba(255,255,255,0.02)}
     .support{margin-left:auto;opacity:.8;padding:8px 14px;border-radius:8px;background:rgba(234,93,243,0.08);border:1px solid rgba(234,93,243,0.2);cursor:pointer;transition:all .18s var(--ease)}
     .support:hover{background:rgba(234,93,243,0.15);transform:translateY(-2px)}
+
+    /* hero section */
+    .hero{
+      max-width:1200px;margin:0 auto;padding:80px 20px 60px;text-align:center;
+    }
+    .hero-title{
+      font-size:3.5rem;font-weight:900;margin:0;background:linear-gradient(135deg,#fff,var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.1;
+    }
+    .hero-subtitle{
+      font-size:1.25rem;color:var(--muted);margin:18px auto 40px;max-width:600px;line-height:1.5;
+    }
+    .hero-buttons{
+      display:flex;gap:14px;justify-content:center;align-items:center;flex-wrap:wrap;
+    }
+    .btn-primary{
+      padding:14px 32px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-secondary));border:none;color:#fff;font-weight:700;font-size:1rem;cursor:pointer;transition:all .22s var(--ease);box-shadow:0 8px 24px rgba(234,93,243,0.25);
+    }
+    .btn-primary:hover{
+      transform:translateY(-3px);box-shadow:0 12px 32px rgba(234,93,243,0.4);
+    }
+    .btn-secondary{
+      padding:14px 32px;border-radius:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);color:#fff;font-weight:600;font-size:1rem;cursor:pointer;transition:all .22s var(--ease);
+    }
+    .btn-secondary:hover{
+      background:rgba(255,255,255,0.05);transform:translateY(-2px);
+    }
+
+    /* stats section */
+    .stats{
+      max-width:1200px;margin:0 auto 60px;padding:0 20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;
+    }
+    .stat-card{
+      padding:28px;border-radius:var(--radius);background:var(--card-bg);border:1px solid var(--glass-border);text-align:center;transition:all .22s var(--ease);
+    }
+    .stat-card:hover{
+      transform:translateY(-4px);border-color:rgba(234,93,243,0.12);box-shadow:0 12px 32px rgba(0,0,0,0.5);
+    }
+    .stat-icon{
+      width:56px;height:56px;margin:0 auto 16px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-secondary));display:flex;align-items:center;justify-content:center;font-size:1.8rem;
+    }
+    .stat-value{
+      font-size:2.2rem;font-weight:800;margin:8px 0;background:linear-gradient(135deg,#fff,var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+    }
+    .stat-label{
+      color:var(--muted);font-size:.95rem;
+    }
+
+    /* features section */
+    .features{
+      max-width:1200px;margin:0 auto 80px;padding:0 20px;
+    }
+    .section-title{
+      text-align:center;font-size:2.2rem;font-weight:800;margin:0 0 40px;
+    }
+    .features-grid{
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;
+    }
+    .feature-card{
+      padding:26px;border-radius:var(--radius);background:var(--card-bg);border:1px solid var(--glass-border);transition:all .22s var(--ease);
+    }
+    .feature-card:hover{
+      transform:translateY(-4px);border-color:rgba(234,93,243,0.12);box-shadow:0 12px 32px rgba(0,0,0,0.5);
+    }
+    .feature-icon{
+      width:48px;height:48px;border-radius:10px;background:rgba(234,93,243,0.12);display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:16px;
+    }
+    .feature-title{
+      font-size:1.15rem;font-weight:700;margin:0 0 10px;
+    }
+    .feature-desc{
+      color:var(--muted);font-size:.95rem;line-height:1.5;
+    }
 
     /* main */
     main.container{max-width:1200px;margin:28px auto;padding:0 20px}
@@ -54,12 +127,14 @@
 
     .search-open { margin-left:auto; }
 
-    /* filters with horizontal scroll */
+    /* filters with fixed height scrollable area */
+    .filters-wrapper{
+      position:relative;margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,0.04);
+    }
     .filters{
-      display:flex;gap:10px;margin-bottom:24px;padding-bottom:20px;
-      border-bottom:1px solid rgba(255,255,255,0.04);
-      overflow-x:auto;overflow-y:hidden;
+      display:flex;gap:10px;overflow-x:auto;overflow-y:hidden;
       scrollbar-width:thin;scrollbar-color:rgba(234,93,243,0.3) rgba(0,0,0,0.2);
+      padding-bottom:4px;
     }
     .filters::-webkit-scrollbar{height:8px}
     .filters::-webkit-scrollbar-track{background:rgba(0,0,0,0.2);border-radius:4px}
@@ -69,9 +144,11 @@
     .pill{
       background:var(--panel); padding:10px 14px;border-radius:12px;font-size:.95rem;color:var(--muted);
       display:inline-flex;align-items:center;gap:8px;border:1px solid var(--glass-border);cursor:pointer;
-      transition:all .18s var(--ease);white-space:nowrap;flex-shrink:0;
+      transition:all .18s var(--ease);white-space:nowrap;flex-shrink:0;position:relative;
     }
-    .pill img{width:18px;height:18px;object-fit:contain}
+    .pill-emoji{
+      width:20px;height:20px;font-size:20px;display:flex;align-items:center;justify-content:center;flex-shrink:0;
+    }
     .pill .count{background:rgba(0,0,0,0.35);padding:4px 8px;border-radius:999px;font-weight:600;color:#fff;font-size:.8rem}
     .pill.active{box-shadow:0 8px 24px rgba(0,0,0,0.6);transform:translateY(-2px);color:#fff;border-color:rgba(234,93,243,0.3);background:rgba(234,93,243,0.08)}
     .pill:hover:not(.active){transform:translateY(-1px);border-color:rgba(234,93,243,0.15)}
@@ -106,14 +183,12 @@
 
     /* category content */
     .category-divider{margin:48px 0 24px 0;padding-bottom:12px;border-bottom:2px solid rgba(234,93,243,0.1);display:flex;align-items:center;gap:12px}
-    .category-icon{width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,var(--accent),#9b5cf2);display:flex;align-items:center;justify-content:center}
-    .category-icon img{width:24px;height:24px;object-fit:contain}
+    .category-icon{width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,var(--accent),#9b5cf2);display:flex;align-items:center;justify-content:center;font-size:20px;}
     .category-title-text{font-size:1.4rem;font-weight:700}
     .category-count{color:var(--muted);font-size:.9rem;margin-left:8px}
-    .category-desc{color:var(--muted);font-size:.9rem;margin-left:48px;margin-top:8px;margin-bottom:20px}
 
     /* modal search */
-    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.45);backdrop-filter:blur(8px);z-index:80;padding:24px}
+    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.45);backdrop-filter:blur(8px);z-index:200;padding:24px}
     .modal.show{display:flex;animation:fadeIn .22s var(--ease) both}
     @keyframes fadeIn{from{opacity:0}to{opacity:1}}
     .modal-panel{width:min(880px,96%);padding:18px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid var(--glass-border);box-shadow:0 20px 60px rgba(0,0,0,0.7);position:relative;transform:translateY(-8px);animation:panelIn .22s var(--ease) both}
@@ -127,15 +202,18 @@
     .result-item:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(0,0,0,0.6)}
 
     /* toast */
-    .toast{position:fixed;right:18px;bottom:18px;padding:10px 14px;border-radius:10px;background:rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.04);color:#fff;z-index:90;display:none}
+    .toast{position:fixed;right:18px;bottom:18px;padding:10px 14px;border-radius:10px;background:rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.04);color:#fff;z-index:300;display:none}
     .toast.show{display:block;animation:toastIn .18s var(--ease) both}
     @keyframes toastIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
     /* helpers */
     .muted{color:var(--muted)}
+    .hidden{display:none !important}
 
     /* responsive */
     @media (max-width:768px){
+      .hero-title{font-size:2.5rem}
+      .hero-subtitle{font-size:1.1rem}
       .page-header h1{font-size:1.5rem}
       .grid{grid-template-columns:1fr}
     }
@@ -146,14 +224,16 @@
 <header class="topbar">
   <div class="top-inner">
     <div class="brand">
-      <div class="logo" aria-hidden="true">A</div>
+      <img src="https://cdn.discordapp.com/avatars/YOUR_BOT_ID/YOUR_AVATAR_HASH.png" alt="AUTOROLE" class="logo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="logo" style="display:none" aria-hidden="true">A</div>
       <div>
         <div class="brand-title">AUTOROLE</div>
-        <div class="muted" style="font-size:0.86rem;margin-top:2px">Your bot commands</div>
+        <div class="muted" style="font-size:0.86rem;margin-top:2px">Advanced Discord Bot</div>
       </div>
       <nav class="topnav" aria-label="top navigation">
-        <a class="active" href="#commands">Commands</a>
-        <a href="https://autorole.bot/privacy-policy" target="_blank">Privacy Policy</a>
+        <a href="#home" class="nav-link active" data-page="home">Home</a>
+        <a href="#commands" class="nav-link" data-page="commands">Commands</a>
+        <a href="https://autorole.bot/privacy-policy" target="_blank">Privacy</a>
       </nav>
     </div>
 
@@ -161,7 +241,83 @@
   </div>
 </header>
 
-<main class="container" role="main">
+<!-- HOME PAGE -->
+<div id="homePage">
+  <section class="hero">
+    <h1 class="hero-title">Welcome to AUTOROLE</h1>
+    <p class="hero-subtitle">The most advanced Discord bot for role management, moderation, and server automation. Trusted by thousands of servers worldwide.</p>
+    <div class="hero-buttons">
+      <button class="btn-primary" onclick="window.open('https://discord.com/api/oauth2/authorize?client_id=YOUR_BOT_ID&permissions=8&scope=bot%20applications.commands', '_blank')">
+        Add to Discord
+      </button>
+      <button class="btn-secondary" onclick="scrollToCommands()">
+        View Commands
+      </button>
+    </div>
+  </section>
+
+  <section class="stats">
+    <div class="stat-card">
+      <div class="stat-icon">🎮</div>
+      <div class="stat-value" id="serverCount">15,234</div>
+      <div class="stat-label">Servers</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">👥</div>
+      <div class="stat-value" id="userCount">2.8M</div>
+      <div class="stat-label">Users</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">⚡</div>
+      <div class="stat-value">99.9%</div>
+      <div class="stat-label">Uptime</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">🌟</div>
+      <div class="stat-value">188</div>
+      <div class="stat-label">Commands</div>
+    </div>
+  </section>
+
+  <section class="features">
+    <h2 class="section-title">Why Choose AUTOROLE?</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🛡️</div>
+        <h3 class="feature-title">Advanced Moderation</h3>
+        <p class="feature-desc">Powerful moderation tools including auto-mod, anti-raid, and comprehensive logging to keep your server safe.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎭</div>
+        <h3 class="feature-title">Role Management</h3>
+        <p class="feature-desc">Automated role assignment, reaction roles, and advanced role management features for seamless organization.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎵</div>
+        <h3 class="feature-title">Music & Entertainment</h3>
+        <p class="feature-desc">High-quality music streaming, fun games, and entertainment features to engage your community.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3 class="feature-title">Analytics & Stats</h3>
+        <p class="feature-desc">Detailed server statistics, activity tracking, and insights to understand your community better.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🌐</div>
+        <h3 class="feature-title">Multi-Language</h3>
+        <p class="feature-desc">Built-in translation features and support for multiple languages to connect global communities.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚙️</div>
+        <h3 class="feature-title">Highly Customizable</h3>
+        <p class="feature-desc">Extensive configuration options and custom commands to tailor the bot to your server's needs.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- COMMANDS PAGE -->
+<main class="container hidden" id="commandsPage" role="main">
   <div class="page-header">
     <div class="page-header-left">
       <img src="https://cdn.discordapp.com/avatars/YOUR_BOT_ID/YOUR_AVATAR_HASH.png" alt="AUTOROLE Bot" class="bot-avatar" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
@@ -180,20 +336,22 @@
     </div>
   </div>
 
-  <section class="filters" role="toolbar" aria-label="filters">
-    <!-- TYPE FILTERS -->
-    <div id="tabAll" class="pill active" data-filter="all">All <span class="count" style="margin-left:8px">188</span></div>
-    <div id="tabPrefix" class="pill" data-filter="prefix">Prefix <span class="chip" style="margin-left:8px">98</span></div>
-    <div id="tabSlash" class="pill" data-filter="slash">Slash <span class="chip" style="margin-left:8px">90</span></div>
-    
-    <!-- DIVIDER -->
-    <div class="filter-divider"></div>
-    
-    <!-- CATEGORY FILTERS (scrollable) -->
-    <div id="categoryFilters" style="display:flex;gap:10px">
-      <!-- Category pills will be inserted here -->
-    </div>
-  </section>
+  <div class="filters-wrapper">
+    <section class="filters" role="toolbar" aria-label="filters">
+      <!-- TYPE FILTERS -->
+      <div id="tabAll" class="pill active" data-filter="all">All <span class="count" style="margin-left:8px">188</span></div>
+      <div id="tabPrefix" class="pill" data-filter="prefix">Prefix <span class="chip" style="margin-left:8px">98</span></div>
+      <div id="tabSlash" class="pill" data-filter="slash">Slash <span class="chip" style="margin-left:8px">90</span></div>
+      
+      <!-- DIVIDER -->
+      <div class="filter-divider"></div>
+      
+      <!-- CATEGORY FILTERS (scrollable) -->
+      <div id="categoryFilters" style="display:flex;gap:10px">
+        <!-- Category pills will be inserted here -->
+      </div>
+    </section>
+  </div>
 
   <div id="commandsGrid">
     <!-- Commands will be injected here -->
@@ -449,31 +607,33 @@ const COMMANDS = [
   { name: "/bannedin", usage: "/bannedin <user_id>", type: "slash", category: "owner", description: "Check ban status" }
 ];
 
-// Custom emoji URLs - REPLACE WITH YOUR DISCORD EMOJI URLS
+// Category info with custom Discord emojis
+// Replace the emoji URLs with your actual Discord emoji URLs from your server
+// Format: https://cdn.discordapp.com/emojis/EMOJI_ID.png (or .gif for animated)
 const CATEGORY_INFO = {
-  afk: { emoji: "https://cdn.discordapp.com/emojis/1234567890123456789.png", title: "AFK" },
-  moderation: { emoji: "https://cdn.discordapp.com/emojis/1234567890123456789.png", title: "Moderation" },
-  automod: { emoji: "https://cdn.discordapp.com/emojis/1234567890123456789.png", title: "AutoMod" },
-  roles: { emoji: "https://cdn.discordapp.com/emojis/1234567890123456789.png", title: "Roles" },
-  server: { emoji: "https://cdn.discordapp.com/emojis/1234567890123456789.png", title: "Server" },
-  utility: { emoji: "https://cdn.discordapp.com/emojis/1234567890123456789.png", title: "Utility" },
-  timezone: { emoji: "https://cdn.discordapp.com/emojis/1234567890123456789.png", title: "Timezone" },
-  translation: { emoji: "https://cdn.discordapp.com/emojis/1234567890123456789.png", title: "Translation" },
-  snipe: { emoji: "https://cdn.discordapp.com/emojis/1234567890123456789.png", title: "Snipe" },
-  music: { emoji: "https://cdn.discordapp.com/emojis/1234567890123456789.png", title: "Music" },
-  tts: { emoji: "https://cdn.discordapp.com/emojis/1234567890123456789.png", title: "TTS" },
-  fun: { emoji: "https://cdn.discordapp.com/emojis/1234567890123456789.png", title: "Fun" },
-  rpg: { emoji: "https://cdn.discordapp.com/emojis/1234567890123456789.png", title: "RPG" },
-  social: { emoji: "https://cdn.discordapp.com/emojis/1234567890123456789.png", title: "Social" },
-  giveaway: { emoji: "https://cdn.discordapp.com/emojis/1234567890123456789.png", title: "Giveaways" },
-  tickets: { emoji: "https://cdn.discordapp.com/emojis/1234567890123456789.png", title: "Tickets" },
-  reminders: { emoji: "https://cdn.discordapp.com/emojis/1234567890123456789.png", title: "Reminders" },
-  messaging: { emoji: "https://cdn.discordapp.com/emojis/1234567890123456789.png", title: "Messaging" },
-  external: { emoji: "https://cdn.discordapp.com/emojis/1234567890123456789.png", title: "External" },
-  emojis: { emoji: "https://cdn.discordapp.com/emojis/1234567890123456789.png", title: "Emojis" },
-  stats: { emoji: "https://cdn.discordapp.com/emojis/1234567890123456789.png", title: "Stats" },
-  premium: { emoji: "https://cdn.discordapp.com/emojis/1234567890123456789.png", title: "Premium" },
-  owner: { emoji: "https://cdn.discordapp.com/emojis/1234567890123456789.png", title: "Owner" }
+  afk: { emoji: "https://cdn.discordapp.com/emojis/1362307270003785800.webp?size=96", title: "AFK", fallback: "💤" },
+  moderation: { emoji: "https://cdn.discordapp.com/emojis/YOUR_MOD_EMOJI_ID.png", title: "Moderation", fallback: "🔨" },
+  automod: { emoji: "https://cdn.discordapp.com/emojis/YOUR_AUTOMOD_EMOJI_ID.png", title: "AutoMod", fallback: "🛡️" },
+  roles: { emoji: "https://cdn.discordapp.com/emojis/YOUR_ROLES_EMOJI_ID.png", title: "Roles", fallback: "🎭" },
+  server: { emoji: "https://cdn.discordapp.com/emojis/YOUR_SERVER_EMOJI_ID.png", title: "Server", fallback: "🏠" },
+  utility: { emoji: "https://cdn.discordapp.com/emojis/YOUR_UTILITY_EMOJI_ID.png", title: "Utility", fallback: "🔧" },
+  timezone: { emoji: "https://cdn.discordapp.com/emojis/YOUR_TIMEZONE_EMOJI_ID.png", title: "Timezone", fallback: "🌍" },
+  translation: { emoji: "https://cdn.discordapp.com/emojis/YOUR_TRANSLATION_EMOJI_ID.png", title: "Translation", fallback: "🌐" },
+  snipe: { emoji: "https://cdn.discordapp.com/emojis/YOUR_SNIPE_EMOJI_ID.png", title: "Snipe", fallback: "🎯" },
+  music: { emoji: "https://cdn.discordapp.com/emojis/YOUR_MUSIC_EMOJI_ID.png", title: "Music", fallback: "🎵" },
+  tts: { emoji: "https://cdn.discordapp.com/emojis/YOUR_TTS_EMOJI_ID.png", title: "TTS", fallback: "🗣️" },
+  fun: { emoji: "https://cdn.discordapp.com/emojis/YOUR_FUN_EMOJI_ID.png", title: "Fun", fallback: "🎮" },
+  rpg: { emoji: "https://cdn.discordapp.com/emojis/YOUR_RPG_EMOJI_ID.png", title: "RPG", fallback: "⚔️" },
+  social: { emoji: "https://cdn.discordapp.com/emojis/YOUR_SOCIAL_EMOJI_ID.png", title: "Social", fallback: "💖" },
+  giveaway: { emoji: "https://cdn.discordapp.com/emojis/YOUR_GIVEAWAY_EMOJI_ID.png", title: "Giveaways", fallback: "🎉" },
+  tickets: { emoji: "https://cdn.discordapp.com/emojis/YOUR_TICKETS_EMOJI_ID.png", title: "Tickets", fallback: "🎫" },
+  reminders: { emoji: "https://cdn.discordapp.com/emojis/YOUR_REMINDERS_EMOJI_ID.png", title: "Reminders", fallback: "⏰" },
+  messaging: { emoji: "https://cdn.discordapp.com/emojis/YOUR_MESSAGING_EMOJI_ID.png", title: "Messaging", fallback: "💬" },
+  external: { emoji: "https://cdn.discordapp.com/emojis/YOUR_EXTERNAL_EMOJI_ID.png", title: "External", fallback: "🔗" },
+  emojis: { emoji: "https://cdn.discordapp.com/emojis/YOUR_EMOJIS_EMOJI_ID.png", title: "Emojis", fallback: "😀" },
+  stats: { emoji: "https://cdn.discordapp.com/emojis/YOUR_STATS_EMOJI_ID.png", title: "Stats", fallback: "📊" },
+  premium: { emoji: "https://cdn.discordapp.com/emojis/YOUR_PREMIUM_EMOJI_ID.png", title: "Premium", fallback: "⭐" },
+  owner: { emoji: "https://cdn.discordapp.com/emojis/YOUR_OWNER_EMOJI_ID.png", title: "Owner", fallback: "👑" }
 };
 
 const modal = document.getElementById('modal');
@@ -487,9 +647,12 @@ const tabPrefix = document.getElementById('tabPrefix');
 const tabSlash = document.getElementById('tabSlash');
 const commandsGrid = document.getElementById('commandsGrid');
 const categoryFilters = document.getElementById('categoryFilters');
+const homePage = document.getElementById('homePage');
+const commandsPage = document.getElementById('commandsPage');
 
 let activeTypeFilter = 'all';
 let activeCategoryFilter = null;
+let currentPage = 'home';
 
 function esc(s){
   if (!s) return '';
@@ -550,15 +713,13 @@ function renderCommands(){
   commandsGrid.innerHTML = '';
   
   Object.keys(grouped).sort().forEach(categoryKey => {
-    const catInfo = CATEGORY_INFO[categoryKey] || { emoji: "", title: categoryKey };
+    const catInfo = CATEGORY_INFO[categoryKey] || { emoji: "📁", title: categoryKey };
     const cmds = grouped[categoryKey];
     
     const header = document.createElement('div');
     header.className = 'category-divider';
     header.innerHTML = `
-      <div class="category-icon">
-        <img src="${catInfo.emoji}" alt="${catInfo.title}" onerror="this.style.display='none'">
-      </div>
+      <div class="category-icon">${catInfo.emoji}</div>
       <div>
         <div class="category-title-text">${catInfo.title}<span class="category-count">(${cmds.length})</span></div>
       </div>
@@ -607,13 +768,13 @@ function initCategoryFilters(){
   categoryFilters.innerHTML = '';
   
   Object.keys(categories).sort().forEach(categoryKey => {
-    const catInfo = CATEGORY_INFO[categoryKey] || { emoji: "", title: categoryKey };
+    const catInfo = CATEGORY_INFO[categoryKey] || { emoji: "📁", title: categoryKey };
     const count = categories[categoryKey];
     
     const pill = document.createElement('div');
     pill.className = 'pill';
     pill.innerHTML = `
-      <img src="${catInfo.emoji}" alt="${catInfo.title}" onerror="this.remove()">
+      <span class="pill-emoji">${catInfo.emoji}</span>
       ${catInfo.title}
       <span class="chip" style="margin-left:8px">${count}</span>
     `;
@@ -635,10 +796,89 @@ function initCategoryFilters(){
   });
 }
 
+function switchPage(page) {
+  currentPage = page;
+  
+  // Update nav links
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.classList.remove('active');
+    if (link.dataset.page === page) {
+      link.classList.add('active');
+    }
+  });
+  
+  // Switch pages
+  if (page === 'home') {
+    homePage.classList.remove('hidden');
+    commandsPage.classList.add('hidden');
+  } else if (page === 'commands') {
+    homePage.classList.add('hidden');
+    commandsPage.classList.remove('hidden');
+    if (commandsGrid.children.length === 0) {
+      renderCommands();
+    }
+  }
+}
+
+function scrollToCommands() {
+  switchPage('commands');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function animateStats() {
+  const serverElement = document.getElementById('serverCount');
+  const userElement = document.getElementById('userCount');
+  
+  const serverTarget = 15234;
+  const userTarget = 2.8;
+  
+  let serverCount = 0;
+  let userCount = 0;
+  
+  const duration = 2000;
+  const stepTime = 30;
+  const serverStep = serverTarget / (duration / stepTime);
+  const userStep = userTarget / (duration / stepTime);
+  
+  const serverInterval = setInterval(() => {
+    serverCount += serverStep;
+    if (serverCount >= serverTarget) {
+      serverCount = serverTarget;
+      clearInterval(serverInterval);
+    }
+    serverElement.textContent = Math.floor(serverCount).toLocaleString();
+  }, stepTime);
+  
+  const userInterval = setInterval(() => {
+    userCount += userStep;
+    if (userCount >= userTarget) {
+      userCount = userTarget;
+      clearInterval(userInterval);
+    }
+    userElement.textContent = userCount.toFixed(1) + 'M';
+  }, stepTime);
+}
+
 function init(){
   updateCounts();
   initCategoryFilters();
-  renderCommands();
+  
+  // Navigation
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const page = link.dataset.page;
+      if (page) {
+        switchPage(page);
+      }
+    });
+  });
+  
+  // Start on home page
+  switchPage('home');
+  
+  // Animate stats on load
+  setTimeout(animateStats, 300);
   
   tabAll.addEventListener('click', () => {
     activeTypeFilter = 'all';
